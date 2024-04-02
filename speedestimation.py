@@ -2,7 +2,6 @@ from ultralytics import YOLO
 from ultralytics.solutions import speed_estimation
 import cv2
 
-
 def speedestimation(source):
     ## this part is to set up the yolo library with official weights, after that can run normally using custom weights
     ## run this on if u are encounterring the following : WARNING ⚠️ weights/barrel.pt appears to require 'ultralytics.yolo', which is not in ultralytics requirements.
