@@ -12,7 +12,7 @@ def define_rect(image):
     """
 
     clone = image.copy()
-    rect_pts = [(0,0),(0,0)]  # Starting and ending points
+    rect_pts = [(0,0),(1920,1080)]  # Starting and ending points
     win_name = "image"  # Window name
 
     def select_points(event, x, y, flags, param):

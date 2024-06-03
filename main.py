@@ -10,15 +10,36 @@ import asyncio
 import signalTelegram
 from IPython import display
 from ultralytics import YOLO
-from IPython.display import display, Image
+from PIL import Image
 import ultralytics
 from roboflow import Roboflow
+import matplotlib.pyplot as plt
+import numpy as np
 
 def main():
 
+    model = YOLO("yolov8s.pt")
+    model("input_media/black_screen.png")
+    model = YOLO("weights/Goodweights/humans/humanv11.pt")
+    human_results = model(source="input_media/brani_ppe_test.jpg")
+    for human_result in human_results:
+        # model = YOLO("weights/barrel_v2.pt")
+        model = YOLO("weights/snehilsanyal-constructionn-site-safety-ppe.pt")
+        orig_img = human_result.orig_img
+        for x1, y1, x2, y2 in human_result.boxes.xyxy:
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+            cropped_img = orig_img[y1:y2, x1:x2]
+            # model = YOLO("weights/snehilsanyal-constructionn-site-safety-ppe.pt")
+            ppe_results = model(cropped_img, imgsz=160, classes=[0,5, 7], show=True)
+            print(model.model_name)
 
-    model = YOLO('weights/humanv12.pt')
-    results = model("input_media/video_2024-03-19_16-01-58.mp4", save=True)
+    # model = YOLO('weights/humanv12.pt')
+    # results = model("input_media/brani_ppe_test.jpg")
+    # model = YOLO('weights/snehilsanyal-constructionn-site-safety-ppe.pt')
+    # results1 = model(results[0].orig_img, save = True)
+
+
+
     #
     # userSelectionHandler.userSelectionHandler()
 
